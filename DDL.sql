@@ -1,9 +1,11 @@
 /* 
 DDL file and sample data for Group 25:
-Spencer Keating and Matthew Clarke
+Spencer Keating and Matthew Clarke.
+Database for storage of operational information for Dirty Spokes 
+Bike Rentals. Tables are Brands, Bikes, Customers, and Rentals where
+Rentals is an intersection table between Customers and Bikes.
 */
 
---Table creation queries 
 CREATE OR REPLACE TABLE Customers (
     customerID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     firstName VARCHAR(50) NOT NULL,
@@ -106,6 +108,10 @@ INSERT INTO Bikes(
     engineHourMeter
 )
 VALUES
+/*
+Bikes created with Foreign Key brandID by Selection of unique brandName
+attribute from Brands table.
+*/
 (
     "JYACB11C0RA015607",
     (SELECT brandID from Brands where brandName = "Yamaha"),
@@ -140,6 +146,11 @@ INSERT INTO Rentals(
     hourMeterIn
 )
 VALUES
+/*
+Rentals samples designed to demonstrate M:N relationship between Customers and Bikes,
+i.e. Customer with Unique email "roman444@email.com" renting multiple bikes while 
+the Bike with Unique frame number "VBKXWM236MM321033" is rented by multiple customers.
+*/
 (
     (SELECT customerID from Customers where email = "roman444@email.com"),
     (SELECT bikeID from Bikes where frameNumber = "VNBS648C4PB000307"),
