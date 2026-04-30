@@ -138,7 +138,7 @@ attribute from Brands table.
     "300 XC-W",
     2021,
     "293cc",
-    225.5
+    71.4
 ),
 (
     "VNBS648C4PB000307",
@@ -146,7 +146,7 @@ attribute from Brands table.
     "SE-F 500 Factory 4T",
     2023,
     "478cc",
-    71.4
+    225.5
 );
 
 INSERT INTO Rentals(
