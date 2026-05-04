@@ -1,0 +1,16 @@
+<h1>Edit Brand</h1>
+
+<form action="/brands/update" method="POST">
+    <input type="hidden" name="brandID" value="{{brand.brandID}}">
+    <label>Brand Name
+        <input type="text" name="brandName" value="{{brand.brandName}}" required>
+    </label>
+    <label>Country of Origin
+        <input type="text" name="countryOfOrigin" value="{{brand.countryOfOrigin}}" required>
+    </label>
+    <label>Local Dealer
+        <input type="text" name="localDealer" value="{{brand.localDealer}}" required>
+    </label>
+    <button type="submit">Update Brand</button>
+    <a href="/brands">Cancel</a>
+</form>

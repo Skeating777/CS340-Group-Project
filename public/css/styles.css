@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #222;
+    background: #f5f5f5;
+}
+
+nav {
+    background: #1a1a1a;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav .nav-title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 12px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+main {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+
+h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #444;
+}
+
+section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 480px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+input, select {
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+button[type="submit"] {
+    padding: 8px 16px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    width: fit-content;
+}
+
+button[type="submit"]:hover {
+    background: #333;
+}
+
+td button[type="submit"] {
+    padding: 4px 10px;
+    font-size: 12px;
+    background: #c0392b;
+}
+
+td button[type="submit"]:hover {
+    background: #e74c3c;
+}
+
+td a {
+    margin-right: 8px;
+    color: #2980b9;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+a[href] {
+    color: #2980b9;
+}
+
+p {
+    margin-bottom: 16px;
+    color: #555;
+}

@@ -1,0 +1,25 @@
+<h1>Edit Customer</h1>
+
+<form action="/customers/update" method="POST">
+    <input type="hidden" name="customerID" value="{{customer.customerID}}">
+    <label>First Name
+        <input type="text" name="firstName" value="{{customer.firstName}}" required>
+    </label>
+    <label>Last Name
+        <input type="text" name="lastName" value="{{customer.lastName}}" required>
+    </label>
+    <label>Date of Birth
+        <input type="date" name="dateOfBirth" value="{{formatDate customer.dateOfBirth}}" required>
+    </label>
+    <label>Email
+        <input type="email" name="email" value="{{customer.email}}" required>
+    </label>
+    <label>Phone
+        <input type="text" name="phone" value="{{customer.phone}}" required>
+    </label>
+    <label>Waiver Date
+        <input type="date" name="waiverDate" value="{{formatDate customer.waiverDate}}" required>
+    </label>
+    <button type="submit">Update Customer</button>
+    <a href="/customers">Cancel</a>
+</form>

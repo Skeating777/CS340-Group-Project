@@ -1,0 +1,29 @@
+<h1>Edit Bike</h1>
+
+<form action="/bikes/update" method="POST">
+    <input type="hidden" name="bikeID" value="{{bike.bikeID}}">
+    <label>Frame Number
+        <input type="text" name="frameNumber" value="{{bike.frameNumber}}" required>
+    </label>
+    <label>Brand
+        <select name="brandID" required>
+            {{#each brands}}
+            <option value="{{brandID}}" {{selected brandID ../bike.brandID}}>{{brandName}}</option>
+            {{/each}}
+        </select>
+    </label>
+    <label>Model Name
+        <input type="text" name="modelName" value="{{bike.modelName}}" required>
+    </label>
+    <label>Engine Size
+        <input type="text" name="engineSize" value="{{bike.engineSize}}" required>
+    </label>
+    <label>Year
+        <input type="number" name="bikeYear" value="{{bike.bikeYear}}" min="1900" max="2100" required>
+    </label>
+    <label>Hour Meter
+        <input type="number" name="engineHourMeter" value="{{bike.engineHourMeter}}" step="0.1" min="0" required>
+    </label>
+    <button type="submit">Update Bike</button>
+    <a href="/bikes">Cancel</a>
+</form>
