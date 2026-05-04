@@ -1,0 +1,69 @@
+<h1>Bikes</h1>
+
+<section>
+    <h2>Browse Bikes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Frame Number</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Engine Size</th>
+                <th>Year</th>
+                <th>Hour Meter</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each bikes}}
+            <tr>
+                <td>{{bikeID}}</td>
+                <td>{{frameNumber}}</td>
+                <td>{{brandName}}</td>
+                <td>{{modelName}}</td>
+                <td>{{engineSize}}</td>
+                <td>{{bikeYear}}</td>
+                <td>{{engineHourMeter}}</td>
+                <td>
+                    <a href="/bikes/edit/{{bikeID}}">Edit</a>
+                    <form action="/bikes/delete" method="POST" style="display:inline">
+                        <input type="hidden" name="bikeID" value="{{bikeID}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Add New Bike</h2>
+    <form action="/bikes/add" method="POST">
+        <label>Frame Number
+            <input type="text" name="frameNumber" required>
+        </label>
+        <label>Brand
+            <select name="brandID" required>
+                <option value="">-- Select Brand --</option>
+                {{#each brands}}
+                <option value="{{brandID}}">{{brandName}}</option>
+                {{/each}}
+            </select>
+        </label>
+        <label>Model Name
+            <input type="text" name="modelName" required>
+        </label>
+        <label>Engine Size
+            <input type="text" name="engineSize" placeholder="e.g. 250cc" required>
+        </label>
+        <label>Year
+            <input type="number" name="bikeYear" min="1900" max="2100" required>
+        </label>
+        <label>Hour Meter
+            <input type="number" name="engineHourMeter" step="0.1" min="0" required>
+        </label>
+        <button type="submit">Add Bike</button>
+    </form>
+</section>

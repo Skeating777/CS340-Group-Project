@@ -1,0 +1,49 @@
+<h1>Brands</h1>
+
+<section>
+    <h2>Browse Brands</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand Name</th>
+                <th>Country of Origin</th>
+                <th>Local Dealer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each brands}}
+            <tr>
+                <td>{{brandID}}</td>
+                <td>{{brandName}}</td>
+                <td>{{countryOfOrigin}}</td>
+                <td>{{localDealer}}</td>
+                <td>
+                    <a href="/brands/edit/{{brandID}}">Edit</a>
+                    <form action="/brands/delete" method="POST" style="display:inline">
+                        <input type="hidden" name="brandID" value="{{brandID}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Add New Brand</h2>
+    <form action="/brands/add" method="POST">
+        <label>Brand Name
+            <input type="text" name="brandName" required>
+        </label>
+        <label>Country of Origin
+            <input type="text" name="countryOfOrigin" required>
+        </label>
+        <label>Local Dealer
+            <input type="text" name="localDealer" required>
+        </label>
+        <button type="submit">Add Brand</button>
+    </form>
+</section>

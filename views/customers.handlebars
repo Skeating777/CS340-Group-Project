@@ -1,0 +1,64 @@
+<h1>Customers</h1>
+
+<section>
+    <h2>Browse Customers</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Waiver Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each customers}}
+            <tr>
+                <td>{{customerID}}</td>
+                <td>{{firstName}}</td>
+                <td>{{lastName}}</td>
+                <td>{{formatDate dateOfBirth}}</td>
+                <td>{{email}}</td>
+                <td>{{phone}}</td>
+                <td>{{formatDate waiverDate}}</td>
+                <td>
+                    <a href="/customers/edit/{{customerID}}">Edit</a>
+                    <form action="/customers/delete" method="POST" style="display:inline">
+                        <input type="hidden" name="customerID" value="{{customerID}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Add New Customer</h2>
+    <form action="/customers/add" method="POST">
+        <label>First Name
+            <input type="text" name="firstName" required>
+        </label>
+        <label>Last Name
+            <input type="text" name="lastName" required>
+        </label>
+        <label>Date of Birth
+            <input type="date" name="dateOfBirth" required>
+        </label>
+        <label>Email
+            <input type="email" name="email" required>
+        </label>
+        <label>Phone
+            <input type="text" name="phone" required>
+        </label>
+        <label>Waiver Date
+            <input type="date" name="waiverDate" required>
+        </label>
+        <button type="submit">Add Customer</button>
+    </form>
+</section>
