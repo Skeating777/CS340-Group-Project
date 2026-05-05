@@ -54,7 +54,7 @@ CREATE OR REPLACE TABLE Rentals(
 );
 
 
---Sample data
+-- Sample data
 INSERT INTO Customers(
     firstName,
     lastName,
