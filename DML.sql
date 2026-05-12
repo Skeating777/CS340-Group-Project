@@ -118,8 +118,7 @@ raw foreign key IDs, requiring JOINs to both Customers and Bikes tables.
 -- SELECT all rentals with customer name and bike model for the Rentals browse page
 SELECT
     Rentals.rentalID,
-    Customers.firstName,
-    Customers.lastName,
+    CONCAT(Customers.firstName, ' ', Customers.lastName) AS customerName,
     Bikes.modelName,
     Rentals.rentalDate,
     Rentals.returnDate,
@@ -136,10 +135,10 @@ FROM Rentals
 WHERE rentalID = @rentalID;
 
 -- SELECT all customers to populate the customer dropdown on the Add/Edit Rental form
-SELECT customerID, firstName, lastName FROM Customers;
+SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers;
 
 -- SELECT all bikes to populate the bike dropdown on the Add/Edit Rental form
-SELECT bikeID, modelName, frameNumber FROM Bikes;
+SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes;
 
 -- INSERT a new rental from the Add Rental form
 INSERT INTO Rentals (customerID, bikeID, rentalDate, returnDate, hourMeterOut, hourMeterIn)

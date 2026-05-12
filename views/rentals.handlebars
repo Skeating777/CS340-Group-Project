@@ -19,7 +19,7 @@
             {{#each rentals}}
             <tr>
                 <td>{{rentalID}}</td>
-                <td>{{firstName}} {{lastName}}</td>
+                <td>{{customerName}}</td>
                 <td>{{modelName}}</td>
                 <td>{{formatDatetime rentalDate}}</td>
                 <td>{{formatDatetime returnDate}}</td>
@@ -45,7 +45,7 @@
             <select name="customerID" required>
                 <option value="">-- Select Customer --</option>
                 {{#each customers}}
-                <option value="{{customerID}}">{{firstName}} {{lastName}}</option>
+                <option value="{{customerID}}">{{customerName}}</option>
                 {{/each}}
             </select>
         </label>
@@ -53,7 +53,7 @@
             <select name="bikeID" required>
                 <option value="">-- Select Bike --</option>
                 {{#each bikes}}
-                <option value="{{bikeID}}">{{modelName}} ({{frameNumber}})</option>
+                <option value="{{bikeID}}">{{bikeLabel}}</option>
                 {{/each}}
             </select>
         </label>

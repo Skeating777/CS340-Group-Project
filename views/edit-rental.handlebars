@@ -5,14 +5,14 @@
     <label>Customer
         <select name="customerID" required>
             {{#each customers}}
-            <option value="{{customerID}}" {{selected customerID ../rental.customerID}}>{{firstName}} {{lastName}}</option>
+            <option value="{{customerID}}" {{selected customerID ../rental.customerID}}>{{customerName}}</option>
             {{/each}}
         </select>
     </label>
     <label>Bike
         <select name="bikeID" required>
             {{#each bikes}}
-            <option value="{{bikeID}}" {{selected bikeID ../rental.bikeID}}>{{modelName}} ({{frameNumber}})</option>
+            <option value="{{bikeID}}" {{selected bikeID ../rental.bikeID}}>{{bikeLabel}}</option>
             {{/each}}
         </select>
     </label>

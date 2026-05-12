@@ -132,7 +132,8 @@ app.post('/bikes/delete', (req, res) => res.redirect('/bikes'));            // T
 app.get('/rentals', async (req, res) => {
     try {
         const [rentals] = await db.query(`
-            SELECT Rentals.rentalID, Customers.firstName, Customers.lastName,
+            SELECT Rentals.rentalID,
+                   CONCAT(Customers.firstName, ' ', Customers.lastName) AS customerName,
                    Bikes.modelName, Rentals.rentalDate, Rentals.returnDate,
                    Rentals.hourMeterOut, Rentals.hourMeterIn
             FROM Rentals
@@ -140,8 +141,12 @@ app.get('/rentals', async (req, res) => {
             JOIN Bikes ON Rentals.bikeID = Bikes.bikeID
             ORDER BY Rentals.rentalID ASC`
         );
-        const [customers] = await db.query('SELECT customerID, firstName, lastName FROM Customers');
-        const [bikes] = await db.query('SELECT bikeID, modelName, frameNumber FROM Bikes');
+        const [customers] = await db.query(
+            "SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers"
+        );
+        const [bikes] = await db.query(
+            "SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes"
+        );
         res.render('rentals', { rentals, customers, bikes });
     } catch (err) {
         console.error(err);
@@ -156,8 +161,12 @@ app.get('/rentals/edit/:id', async (req, res) => {
             [req.params.id]
         );
         if (!rows.length) return res.redirect('/rentals');
-        const [customers] = await db.query('SELECT customerID, firstName, lastName FROM Customers');
-        const [bikes] = await db.query('SELECT bikeID, modelName, frameNumber FROM Bikes');
+        const [customers] = await db.query(
+            "SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers"
+        );
+        const [bikes] = await db.query(
+            "SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes"
+        );
         res.render('edit-rental', { rental: rows[0], customers, bikes });
     } catch (err) {
         console.error(err);
