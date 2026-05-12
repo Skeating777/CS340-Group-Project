@@ -100,7 +100,7 @@ app.get('/bikes', async (req, res) => {
             JOIN Brands ON Bikes.brandID = Brands.brandID
             ORDER BY Bikes.bikeID ASC`
         );
-        const [brands] = await db.query('SELECT brandID, brandName FROM Brands');
+        const [brands] = await db.query('SELECT brandID, brandName FROM Brands ORDER BY brandName ASC');
         res.render('bikes', { bikes, brands });
     } catch (err) {
         console.error(err);
@@ -115,7 +115,7 @@ app.get('/bikes/edit/:id', async (req, res) => {
             [req.params.id]
         );
         if (!rows.length) return res.redirect('/bikes');
-        const [brands] = await db.query('SELECT brandID, brandName FROM Brands');
+        const [brands] = await db.query('SELECT brandID, brandName FROM Brands ORDER BY brandName ASC');
         res.render('edit-bike', { bike: rows[0], brands });
     } catch (err) {
         console.error(err);
@@ -142,10 +142,10 @@ app.get('/rentals', async (req, res) => {
             ORDER BY Rentals.rentalID ASC`
         );
         const [customers] = await db.query(
-            "SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers"
+            "SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers ORDER BY firstName ASC, lastName ASC"
         );
         const [bikes] = await db.query(
-            "SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes"
+            "SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes ORDER BY modelName ASC"
         );
         res.render('rentals', { rentals, customers, bikes });
     } catch (err) {
@@ -162,10 +162,10 @@ app.get('/rentals/edit/:id', async (req, res) => {
         );
         if (!rows.length) return res.redirect('/rentals');
         const [customers] = await db.query(
-            "SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers"
+            "SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers ORDER BY firstName ASC, lastName ASC"
         );
         const [bikes] = await db.query(
-            "SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes"
+            "SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes ORDER BY modelName ASC"
         );
         res.render('edit-rental', { rental: rows[0], customers, bikes });
     } catch (err) {

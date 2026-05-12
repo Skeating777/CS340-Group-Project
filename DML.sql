@@ -89,7 +89,8 @@ FROM Bikes
 WHERE bikeID = @bikeID;
 
 -- SELECT all brands to populate the brand dropdown on the Add/Edit Bike form
-SELECT brandID, brandName FROM Brands;
+SELECT brandID, brandName FROM Brands
+ORDER BY brandName ASC;
 
 -- INSERT a new bike from the Add Bike form
 INSERT INTO Bikes (frameNumber, brandID, modelName, engineSize, bikeYear, engineHourMeter)
@@ -135,10 +136,14 @@ FROM Rentals
 WHERE rentalID = @rentalID;
 
 -- SELECT all customers to populate the customer dropdown on the Add/Edit Rental form
-SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName FROM Customers;
+SELECT customerID, CONCAT(firstName, ' ', lastName) AS customerName
+FROM Customers
+ORDER BY firstName ASC, lastName ASC;
 
 -- SELECT all bikes to populate the bike dropdown on the Add/Edit Rental form
-SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel FROM Bikes;
+SELECT bikeID, CONCAT(modelName, ' (', frameNumber, ')') AS bikeLabel
+FROM Bikes
+ORDER BY modelName ASC;
 
 -- INSERT a new rental from the Add Rental form
 INSERT INTO Rentals (customerID, bikeID, rentalDate, returnDate, hourMeterOut, hourMeterIn)

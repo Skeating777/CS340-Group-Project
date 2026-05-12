@@ -65,27 +65,27 @@ INSERT INTO Customers(
 )
 VALUES
 (
-    "Jeremy",
-    "Stevens",
+    'Jeremy',
+    'Stevens',
     '1989-06-11',
-    "jsteve0@email.com",
-    "555-0101",
+    'jsteve0@email.com',
+    '555-0101',
     '2024-11-22'
 ),
 (
-    "Andrea",
-    "Hernandez",
+    'Andrea',
+    'Hernandez',
     '2003-11-25',
-    "andreah44@email.com",
-    "555-0202",
+    'andreah44@email.com',
+    '555-0202',
     '2025-04-17'
 ),
 (
-    "Roman",
-    "Lutoslawski",
+    'Roman',
+    'Lutoslawski',
     '1978-08-26',
-    "roman444@email.com",
-    "555-0303",
+    'roman444@email.com',
+    '555-0303',
     '2020-08-20'
 );
 
@@ -96,27 +96,27 @@ INSERT INTO Brands(
 )
 VALUES
 (
-    "Sherco",
-    "France",
-    "Trials Offroad"
+    'Sherco',
+    'France',
+    'Trials Offroad'
 ),
 (
-    "KTM",
-    "Austria",
-    "SoCal Moto"
+    'KTM',
+    'Austria',
+    'SoCal Moto'
 ),
 (
-    "Yamaha",
-    "Japan",
-    "SoCal Moto"
+    'Yamaha',
+    'Japan',
+    'SoCal Moto'
 );
 
 INSERT INTO Bikes(
     frameNumber,
     brandID,
     modelName,
-    bikeYear,
     engineSize,
+    bikeYear,
     engineHourMeter
 )
 VALUES
@@ -125,27 +125,27 @@ Bikes created with Foreign Key brandID by Selection of unique brandName
 attribute from Brands table.
 */
 (
-    "JYACB11C0RA015607",
-    (SELECT brandID from Brands where brandName = "Yamaha"),
-    "YZ65",
+    'JYACB11C0RA015607',
+    (SELECT brandID from Brands where brandName = 'Yamaha'),
+    'YZ65',
+    '65cc',
     2024,
-    "65cc",
     15.8
 ),
 (
-    "VBKXWM236MM321033",
-    (SELECT brandID from Brands where brandName = "KTM"),
-    "300 XC-W",
+    'VBKXWM236MM321033',
+    (SELECT brandID from Brands where brandName = 'KTM'),
+    '300 XC-W',
+    '293cc',
     2021,
-    "293cc",
     71.4
 ),
 (
-    "VNBS648C4PB000307",
-    (SELECT brandID from Brands where brandName = "Sherco"),
-    "SE-F 500 Factory 4T",
+    'VNBS648C4PB000307',
+    (SELECT brandID from Brands where brandName = 'Sherco'),
+    'SE-F 500 Factory 4T',
+    '478cc',
     2023,
-    "478cc",
     225.5
 );
 
@@ -160,28 +160,28 @@ INSERT INTO Rentals(
 VALUES
 /*
 Rentals samples designed to demonstrate M:N relationship between Customers and Bikes,
-i.e. Customer with Unique email "roman444@email.com" renting multiple bikes while
-the Bike with Unique frame number "VBKXWM236MM321033" is rented by multiple customers.
+i.e. Customer with Unique email 'roman444@email.com' renting multiple bikes while
+the Bike with Unique frame number 'VBKXWM236MM321033' is rented by multiple customers.
 */
 (
-    (SELECT customerID from Customers where email = "roman444@email.com"),
-    (SELECT bikeID from Bikes where frameNumber = "VNBS648C4PB000307"),
+    (SELECT customerID from Customers where email = 'roman444@email.com'),
+    (SELECT bikeID from Bikes where frameNumber = 'VNBS648C4PB000307'),
     '2025-04-06 11:22:56',
     '2025-04-08 16:43:16',
     219.9,
     225.5
 ),
 (
-    (SELECT customerID from Customers where email = "roman444@email.com"),
-    (SELECT bikeID from Bikes where frameNumber = "VBKXWM236MM321033"),
+    (SELECT customerID from Customers where email = 'roman444@email.com'),
+    (SELECT bikeID from Bikes where frameNumber = 'VBKXWM236MM321033'),
     '2026-04-10 09:30:17',
     '2026-04-13 10:17:44',
     60.6,
     68.0
 ),
 (
-    (SELECT customerID from Customers where email = "andreah44@email.com"),
-    (SELECT bikeID from Bikes where frameNumber = "VBKXWM236MM321033"),
+    (SELECT customerID from Customers where email = 'andreah44@email.com'),
+    (SELECT bikeID from Bikes where frameNumber = 'VBKXWM236MM321033'),
     '2026-04-19 10:19:19',
     '2026-04-19 15:22:04',
     68.1,
