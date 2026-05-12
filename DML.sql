@@ -13,7 +13,8 @@ submitted by the user via the web form.
 -- Customers
 -- SELECT all customers for the Customers browse page
 SELECT customerID, firstName, lastName, dateOfBirth, email, phone, waiverDate
-FROM Customers;
+FROM Customers
+ORDER BY customerID ASC;
 
 -- SELECT a single customer by ID for the edit form
 SELECT customerID, firstName, lastName, dateOfBirth, email, phone, waiverDate
@@ -41,7 +42,8 @@ DELETE FROM Customers WHERE customerID = @customerID;
 -- Brands
 -- SELECT all brands for the Brands browse page
 SELECT brandID, brandName, countryOfOrigin, localDealer
-FROM Brands;
+FROM Brands
+ORDER BY brandID ASC;
 
 -- SELECT a single brand by ID for the edit form
 SELECT brandID, brandName, countryOfOrigin, localDealer
@@ -78,7 +80,8 @@ SELECT
     Bikes.bikeYear,
     Bikes.engineHourMeter
 FROM Bikes
-JOIN Brands ON Bikes.brandID = Brands.brandID;
+JOIN Brands ON Bikes.brandID = Brands.brandID
+ORDER BY Bikes.bikeID ASC;
 
 -- SELECT a single bike by ID for the edit form
 SELECT bikeID, frameNumber, brandID, modelName, engineSize, bikeYear, engineHourMeter
@@ -124,7 +127,8 @@ SELECT
     Rentals.hourMeterIn
 FROM Rentals
 JOIN Customers ON Rentals.customerID = Customers.customerID
-JOIN Bikes ON Rentals.bikeID = Bikes.bikeID;
+JOIN Bikes ON Rentals.bikeID = Bikes.bikeID
+ORDER BY Rentals.rentalID ASC;
 
 -- SELECT a single rental by ID for the edit form
 SELECT rentalID, customerID, bikeID, rentalDate, returnDate, hourMeterOut, hourMeterIn

@@ -30,7 +30,7 @@ app.get('/', (req, res) => res.render('index'));
 app.get('/customers', async (req, res) => {
     try {
         const [customers] = await db.query(
-            'SELECT customerID, firstName, lastName, dateOfBirth, email, phone, waiverDate FROM Customers'
+            'SELECT customerID, firstName, lastName, dateOfBirth, email, phone, waiverDate FROM Customers ORDER BY customerID ASC'
         );
         res.render('customers', { customers });
     } catch (err) {
@@ -62,7 +62,7 @@ app.post('/customers/delete', (req, res) => res.redirect('/customers'));    // T
 app.get('/brands', async (req, res) => {
     try {
         const [brands] = await db.query(
-            'SELECT brandID, brandName, countryOfOrigin, localDealer FROM Brands'
+            'SELECT brandID, brandName, countryOfOrigin, localDealer FROM Brands ORDER BY brandID ASC'
         );
         res.render('brands', { brands });
     } catch (err) {
@@ -97,7 +97,8 @@ app.get('/bikes', async (req, res) => {
             SELECT Bikes.bikeID, Bikes.frameNumber, Brands.brandName,
                    Bikes.modelName, Bikes.engineSize, Bikes.bikeYear, Bikes.engineHourMeter
             FROM Bikes
-            JOIN Brands ON Bikes.brandID = Brands.brandID`
+            JOIN Brands ON Bikes.brandID = Brands.brandID
+            ORDER BY Bikes.bikeID ASC`
         );
         const [brands] = await db.query('SELECT brandID, brandName FROM Brands');
         res.render('bikes', { bikes, brands });
@@ -136,7 +137,8 @@ app.get('/rentals', async (req, res) => {
                    Rentals.hourMeterOut, Rentals.hourMeterIn
             FROM Rentals
             JOIN Customers ON Rentals.customerID = Customers.customerID
-            JOIN Bikes ON Rentals.bikeID = Bikes.bikeID`
+            JOIN Bikes ON Rentals.bikeID = Bikes.bikeID
+            ORDER BY Rentals.rentalID ASC`
         );
         const [customers] = await db.query('SELECT customerID, firstName, lastName FROM Customers');
         const [bikes] = await db.query('SELECT bikeID, modelName, frameNumber FROM Bikes');
