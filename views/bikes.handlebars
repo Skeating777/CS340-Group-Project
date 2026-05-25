@@ -38,39 +38,41 @@
     </table>
 </section>
 
-<section>
-    <h2>Add New Bike</h2>
-    <form action="/bikes/add" method="POST">
-        <label>Frame Number
-            <input type="text" name="frameNumber" required>
-        </label>
-        <label>Brand
-            <select name="brandID" required>
-                <option value="">-- Select Brand --</option>
-                {{#each brands}}
-                <option value="{{brandID}}">{{brandName}}</option>
-                {{/each}}
-            </select>
-        </label>
-        <label>Model Name
-            <input type="text" name="modelName" required>
-        </label>
-        <label>Engine Size
-            <input type="text" name="engineSize" placeholder="e.g. 250cc" required>
-        </label>
-        <label>Year
-            <input type="number" name="bikeYear" min="1900" max="2100" required>
-        </label>
-        <label>Hour Meter
-            <input type="number" name="engineHourMeter" step="0.1" min="0" required>
-        </label>
-        <button type="submit">Add Bike</button>
-    </form>
-</section>
+<div style="display: flex; gap: 24px; align-items: flex-start;">
+    <section style="flex: 2;">
+        <h2>Add New Bike</h2>
+        <form action="/bikes/add" method="POST">
+            <label>Frame Number
+                <input type="text" name="frameNumber" required>
+            </label>
+            <label>Brand
+                <select name="brandID" required>
+                    <option value="">-- Select Brand --</option>
+                    {{#each brands}}
+                    <option value="{{brandID}}">{{brandName}}</option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>Model Name
+                <input type="text" name="modelName" required>
+            </label>
+            <label>Engine Size
+                <input type="text" name="engineSize" placeholder="e.g. 250cc" required>
+            </label>
+            <label>Year
+                <input type="number" name="bikeYear" min="1900" max="2100" required>
+            </label>
+            <label>Hour Meter
+                <input type="number" name="engineHourMeter" step="0.1" min="0" required>
+            </label>
+            <button type="submit">Add Bike</button>
+        </form>
+    </section>
 
-<section>
-    <h2>Admin Actions</h2>
-    <form action="/reset" method="GET" style="display:inline">
-        <button type="submit">RESET Database</button>
-    </form>
-</section>
+    <section style="flex: 1;">
+        <h2>Admin Actions</h2>
+        <form action="/reset" method="GET" style="display:inline">
+            <button type="submit">RESET Database</button>
+        </form>
+    </section>
+</div>

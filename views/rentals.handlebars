@@ -38,44 +38,46 @@
     </table>
 </section>
 
-<section>
-    <h2>Add New Rental</h2>
-    <form action="/rentals/add" method="POST">
-        <label>Customer
-            <select name="customerID" required>
-                <option value="">-- Select Customer --</option>
-                {{#each customers}}
-                <option value="{{customerID}}">{{customerName}}</option>
-                {{/each}}
-            </select>
-        </label>
-        <label>Bike
-            <select name="bikeID" required>
-                <option value="">-- Select Bike --</option>
-                {{#each bikes}}
-                <option value="{{bikeID}}">{{bikeLabel}}</option>
-                {{/each}}
-            </select>
-        </label>
-        <label>Rental Date
-            <input type="datetime-local" name="rentalDate" step="1" required>
-        </label>
-        <label>Return Date
-            <input type="datetime-local" name="returnDate" step="1" required>
-        </label>
-        <label>Hour Meter Out
-            <input type="number" name="hourMeterOut" step="0.1" min="0" required>
-        </label>
-        <label>Hour Meter In
-            <input type="number" name="hourMeterIn" step="0.1" min="0" required>
-        </label>
-        <button type="submit">Add Rental</button>
-    </form>
-</section>
+<div style="display: flex; gap: 24px; align-items: flex-start;">
+    <section style="flex: 2;">
+        <h2>Add New Rental</h2>
+        <form action="/rentals/add" method="POST">
+            <label>Customer
+                <select name="customerID" required>
+                    <option value="">-- Select Customer --</option>
+                    {{#each customers}}
+                    <option value="{{customerID}}">{{customerName}}</option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>Bike
+                <select name="bikeID" required>
+                    <option value="">-- Select Bike --</option>
+                    {{#each bikes}}
+                    <option value="{{bikeID}}">{{bikeLabel}}</option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>Rental Date
+                <input type="datetime-local" name="rentalDate" step="1" required>
+            </label>
+            <label>Return Date
+                <input type="datetime-local" name="returnDate" step="1" required>
+            </label>
+            <label>Hour Meter Out
+                <input type="number" name="hourMeterOut" step="0.1" min="0" required>
+            </label>
+            <label>Hour Meter In
+                <input type="number" name="hourMeterIn" step="0.1" min="0" required>
+            </label>
+            <button type="submit">Add Rental</button>
+        </form>
+    </section>
 
-<section>
-    <h2>Admin Actions</h2>
-    <form action="/reset" method="GET" style="display:inline">
-        <button type="submit">RESET Database</button>
-    </form>
-</section>
+    <section style="flex: 1;">
+        <h2>Admin Actions</h2>
+        <form action="/reset" method="GET" style="display:inline">
+            <button type="submit">RESET Database</button>
+        </form>
+    </section>
+</div>

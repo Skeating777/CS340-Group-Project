@@ -32,25 +32,27 @@
     </table>
 </section>
 
-<section>
-    <h2>Add New Brand</h2>
-    <form action="/brands/add" method="POST">
-        <label>Brand Name
-            <input type="text" name="brandName" required>
-        </label>
-        <label>Country of Origin
-            <input type="text" name="countryOfOrigin" required>
-        </label>
-        <label>Local Dealer
-            <input type="text" name="localDealer" required>
-        </label>
-        <button type="submit">Add Brand</button>
-    </form>
-</section>
+<div style="display: flex; gap: 24px; align-items: flex-start;">
+    <section style="flex: 2;">
+        <h2>Add New Brand</h2>
+        <form action="/brands/add" method="POST">
+            <label>Brand Name
+                <input type="text" name="brandName" required>
+            </label>
+            <label>Country of Origin
+                <input type="text" name="countryOfOrigin" required>
+            </label>
+            <label>Local Dealer
+                <input type="text" name="localDealer" required>
+            </label>
+            <button type="submit">Add Brand</button>
+        </form>
+    </section>
 
-<section>
-    <h2>Admin Actions</h2>
-    <form action="/reset" method="GET" style="display:inline">
-        <button type="submit">RESET Database</button>
-    </form>
-</section>
+    <section style="flex: 1;">
+        <h2>Admin Actions</h2>
+        <form action="/reset" method="GET" style="display:inline">
+            <button type="submit">RESET Database</button>
+        </form>
+    </section>
+</div>
