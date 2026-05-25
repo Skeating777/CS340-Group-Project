@@ -3,7 +3,7 @@ PL/SQL file for Group 25:
 Spencer Keating and Matthew Clarke.
 Stored procedures for the Dirty Spokes Bike Rentals web application.
 Includes sp_DeleteSampleData for verifying RESET, and Add/Update/Delete
-procedures for Customers, Brands, Bikes, and Rentals.
+procedures for Customers, Brands, Bikes, and Rentals
 */
 
 -- Demo CUD operation to verify RESET
