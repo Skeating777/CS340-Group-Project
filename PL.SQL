@@ -1,20 +1,9 @@
 /*
 PL/SQL file for Group 25:
 Spencer Keating and Matthew Clarke.
-Stored procedures for the Dirty Spokes Bike Rentals web application.
-Includes sp_DeleteSampleData for verifying RESET, and Add/Update/Delete
-procedures for Customers, Brands, Bikes, and Rentals
+Add/Update/Delete stored procedures for the Dirty Spokes Bike Rentals web
+application, covering Customers, Brands, Bikes, and Rentals
 */
-
--- Demo CUD operation to verify RESET
-DROP PROCEDURE IF EXISTS sp_DeleteSampleData;
-DELIMITER //
-CREATE PROCEDURE sp_DeleteSampleData()
-BEGIN
-DELETE FROM Customers WHERE email = 'jsteve0@email.com';
-END //
-DELIMITER ;
-
 
 -- Customers
 DROP PROCEDURE IF EXISTS sp_AddCustomer;

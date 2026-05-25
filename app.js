@@ -65,16 +65,6 @@ app.get('/customers/edit/:id', async (req, res) => {
     }
 });
 
-app.get('/customers/delete-jeremy', async (req, res) => {
-    try {
-        await db.query('CALL sp_DeleteSampleData()');
-        res.redirect('/customers');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Database error');
-    }
-});
-
 app.post('/customers/add', async (req, res) => {
     try {
         await db.query(
