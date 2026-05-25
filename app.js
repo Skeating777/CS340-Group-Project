@@ -30,7 +30,7 @@ app.get('/', (req, res) => res.render('index'));
 app.get('/reset', async (req, res) => {
     try {
         await db.query('CALL reset_db()');
-        res.redirect('/');
+        res.redirect(req.get('referer') || '/');
     } catch (err) {
         console.error(err);
         res.status(500).send('Database error');
