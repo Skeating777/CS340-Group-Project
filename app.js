@@ -10,8 +10,10 @@ app.engine('handlebars', engine({
     helpers: {
         // Format DATE columns as YYYY-MM-DD for date inputs and display
         formatDate: (d) => d ? new Date(d).toISOString().split('T')[0] : '',
-        // Format DATETIME columns as YYYY-MM-DDTHH:MM for datetime-local inputs
-        formatDatetime: (d) => d ? new Date(d).toISOString().slice(0, 16) : '',
+        // Format DATETIME columns as YYYY-MM-DDTHH:MM:SS for datetime-local inputs
+        formatDatetime: (d) => d ? new Date(d).toISOString().slice(0, 19) : '',
+        // Format DATETIME columns as YYYY-MM-DD HH:MM:SS for table display
+        displayDatetime: (d) => d ? new Date(d).toISOString().slice(0, 19).replace('T', ' ') : '',
         // Mark the matching option as selected in a dropdown
         selected: (a, b) => a == b ? 'selected' : ''
     }
@@ -24,6 +26,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // ---- Index ----
 app.get('/', (req, res) => res.render('index'));
+
+app.get('/reset', async (req, res) => {
+    try {
+        await db.query('CALL reset_db()');
+        res.redirect('/');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 
 
 // ---- Customers ----
@@ -53,9 +65,53 @@ app.get('/customers/edit/:id', async (req, res) => {
     }
 });
 
-app.post('/customers/add', (req, res) => res.redirect('/customers'));       // TODO Step 4
-app.post('/customers/update', (req, res) => res.redirect('/customers'));    // TODO Step 4
-app.post('/customers/delete', (req, res) => res.redirect('/customers'));    // TODO Step 4
+app.get('/customers/delete-jeremy', async (req, res) => {
+    try {
+        await db.query('CALL sp_DeleteSampleData()');
+        res.redirect('/customers');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/customers/add', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_AddCustomer(?, ?, ?, ?, ?, ?)',
+            [req.body.firstName, req.body.lastName, req.body.dateOfBirth,
+             req.body.email, req.body.phone, req.body.waiverDate]
+        );
+        res.redirect('/customers');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/customers/update', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_UpdateCustomer(?, ?, ?, ?, ?, ?, ?)',
+            [req.body.customerID, req.body.firstName, req.body.lastName,
+             req.body.dateOfBirth, req.body.email, req.body.phone, req.body.waiverDate]
+        );
+        res.redirect('/customers');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/customers/delete', async (req, res) => {
+    try {
+        await db.query('CALL sp_DeleteCustomer(?)', [req.body.customerID]);
+        res.redirect('/customers');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 
 
 // ---- Brands ----
@@ -85,9 +141,41 @@ app.get('/brands/edit/:id', async (req, res) => {
     }
 });
 
-app.post('/brands/add', (req, res) => res.redirect('/brands'));             // TODO Step 4
-app.post('/brands/update', (req, res) => res.redirect('/brands'));          // TODO Step 4
-app.post('/brands/delete', (req, res) => res.redirect('/brands'));          // TODO Step 4
+app.post('/brands/add', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_AddBrand(?, ?, ?)',
+            [req.body.brandName, req.body.countryOfOrigin, req.body.localDealer]
+        );
+        res.redirect('/brands');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/brands/update', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_UpdateBrand(?, ?, ?, ?)',
+            [req.body.brandID, req.body.brandName, req.body.countryOfOrigin, req.body.localDealer]
+        );
+        res.redirect('/brands');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/brands/delete', async (req, res) => {
+    try {
+        await db.query('CALL sp_DeleteBrand(?)', [req.body.brandID]);
+        res.redirect('/brands');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 
 
 // ---- Bikes ----
@@ -123,9 +211,43 @@ app.get('/bikes/edit/:id', async (req, res) => {
     }
 });
 
-app.post('/bikes/add', (req, res) => res.redirect('/bikes'));               // TODO Step 4
-app.post('/bikes/update', (req, res) => res.redirect('/bikes'));            // TODO Step 4
-app.post('/bikes/delete', (req, res) => res.redirect('/bikes'));            // TODO Step 4
+app.post('/bikes/add', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_AddBike(?, ?, ?, ?, ?, ?)',
+            [req.body.frameNumber, req.body.brandID, req.body.modelName,
+             req.body.engineSize, req.body.bikeYear, req.body.engineHourMeter]
+        );
+        res.redirect('/bikes');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/bikes/update', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_UpdateBike(?, ?, ?, ?, ?, ?, ?)',
+            [req.body.bikeID, req.body.frameNumber, req.body.brandID, req.body.modelName,
+             req.body.engineSize, req.body.bikeYear, req.body.engineHourMeter]
+        );
+        res.redirect('/bikes');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/bikes/delete', async (req, res) => {
+    try {
+        await db.query('CALL sp_DeleteBike(?)', [req.body.bikeID]);
+        res.redirect('/bikes');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 
 
 // ---- Rentals ----
@@ -174,9 +296,45 @@ app.get('/rentals/edit/:id', async (req, res) => {
     }
 });
 
-app.post('/rentals/add', (req, res) => res.redirect('/rentals'));           // TODO Step 4
-app.post('/rentals/update', (req, res) => res.redirect('/rentals'));        // TODO Step 4
-app.post('/rentals/delete', (req, res) => res.redirect('/rentals'));        // TODO Step 4
+app.post('/rentals/add', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_AddRental(?, ?, ?, ?, ?, ?)',
+            [req.body.customerID, req.body.bikeID,
+             req.body.rentalDate.replace('T', ' '), req.body.returnDate.replace('T', ' '),
+             req.body.hourMeterOut, req.body.hourMeterIn]
+        );
+        res.redirect('/rentals');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/rentals/update', async (req, res) => {
+    try {
+        await db.query(
+            'CALL sp_UpdateRental(?, ?, ?, ?, ?, ?, ?)',
+            [req.body.rentalID, req.body.customerID, req.body.bikeID,
+             req.body.rentalDate.replace('T', ' '), req.body.returnDate.replace('T', ' '),
+             req.body.hourMeterOut, req.body.hourMeterIn]
+        );
+        res.redirect('/rentals');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+
+app.post('/rentals/delete', async (req, res) => {
+    try {
+        await db.query('CALL sp_DeleteRental(?)', [req.body.rentalID]);
+        res.redirect('/rentals');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
 
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

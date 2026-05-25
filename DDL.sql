@@ -6,9 +6,11 @@ Bike Rentals. Tables are Brands, Bikes, Customers, and Rentals where
 Rentals is an intersection table between Customers and Bikes.
 */
 
+DROP PROCEDURE IF EXISTS reset_db;
+DELIMITER //
+CREATE PROCEDURE reset_db()
+BEGIN
 SET FOREIGN_KEY_CHECKS=0;
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 
 CREATE OR REPLACE TABLE Customers (
     customerID  INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -189,4 +191,7 @@ the Bike with Unique frame number 'VBKXWM236MM321033' is rented by multiple cust
 );
 
 SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
+END //
+DELIMITER ;
+
+-- CALL reset_db();
