@@ -5,6 +5,14 @@ Add/Update/Delete stored procedures for the Dirty Spokes Bike Rentals web
 application, covering Customers, Brands, Bikes, and Rentals
 */
 
+/* 
+Citation for use of AI Tools:
+Date: 05/27/2026
+Prompts used to generate PL/SQL:
+With the provided DDL can you write an example sp_AddCustomer stored procedure?
+AI Source URL: https://claude.ai/
+*/
+
 -- Customers
 DROP PROCEDURE IF EXISTS sp_AddCustomer;
 DELIMITER //

@@ -1,3 +1,10 @@
+// Citation for use of AI Tools:
+// Date: 05/27/2026
+// Prompts used to generate boilerplate:
+// With the provided stored procedure can you write a POST route example
+// AI Source URL: https://claude.ai/
+
+
 const express = require('express');
 const { engine } = require('express-handlebars');
 const db = require('./database/db-connector');
